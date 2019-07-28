@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
         shoeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,ProductList.class);
+                Intent i = new Intent(MainActivity.this,AddProduct.class);
                 startActivity(i);
             }
         });
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         shirtCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,ProductList.class);
+                Intent i = new Intent(MainActivity.this,AddProduct.class);
                 startActivity(i);
             }
         });
@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         walletCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,ProductList.class);
+                Intent i = new Intent(MainActivity.this,AddProduct.class);
                 startActivity(i);
             }
         });

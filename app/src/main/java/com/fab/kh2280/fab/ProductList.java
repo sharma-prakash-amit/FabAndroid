@@ -2,62 +2,73 @@ package com.fab.kh2280.fab;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static android.content.ContentValues.TAG;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class ProductList extends Activity {
 
     //Master data of list
-    String[] nameArray = {"Octopus","Pig","Sheep","Rabbit","Snake","Spider" };
-
-    String[] infoArray = {
-            "8 tentacled monster",
-            "Delicious in rolls",
-            "Great for jumpers",
-            "Nice in a stew",
-            "Great for shoes",
-            "Scary."
+    Integer[] imageArray = {
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,
+            R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog,R.drawable.dog
     };
 
-    Integer[] imageArray = {R.drawable.dog,
-            R.drawable.dog,
-            R.drawable.dog,
-            R.drawable.dog,
-            R.drawable.dog,
-            R.drawable.dog};
+
+    String[] productName={};//nameArray
+    String[] productDesc={};//infoArray
+
 
     ListView listView;
+    DatabaseReference reff;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        getData("Shoes");
 
-        myRef.setValue("Hello, World!");
-        myRef.setValue("Hello, Country!");
-        myRef.setValue("Hello, State!");
-        myRef.setValue("Hello, City!");
+
+
+    }
+
+    private void populateListView() {
 
         //Set Custom Adapter to list
-        CustomProductListAdaptor whatever = new CustomProductListAdaptor(this, nameArray, infoArray, imageArray);
+        CustomProductListAdaptor singleProduct = new CustomProductListAdaptor(this, productName, productDesc, imageArray);
         listView = (ListView) findViewById(R.id.product_list_item);
-        listView.setAdapter(whatever);
+        listView.setAdapter(singleProduct);
 
         //Set on click method of list
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,32 +76,51 @@ public class ProductList extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(ProductList.this, ProductDetails.class);
-                String message = nameArray[position];
-                intent.putExtra("animal", message);
+                String message = productDesc[position];
+                intent.putExtra("description", message);
                 startActivity(intent);
             }
         });
 
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+
+    }
+
+    private void getData(String itemType) {
+
+        reff = FirebaseDatabase.getInstance().getReference().child("Product").child(itemType);
+        reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
+                HashMap<String,String> productData = new HashMap<>();
+                productData = (HashMap<String, String>) dataSnapshot.getValue();
+
+                int i=0;
+                productName = new String[productData.keySet().size()];
+                productDesc = new String[productData.keySet().size()];
+
+                for (String key : productData.keySet()){
+
+                    productName[i] = dataSnapshot.child(key).child("name")!=null?
+                            dataSnapshot.child(key).child("name").getValue().toString():
+                            "-";
+
+                    productDesc[i] = dataSnapshot.child(key).child("description")!=null?
+                            dataSnapshot.child(key).child("description").getValue().toString():
+                            "-";
+
+                    i++;
+                }
+
+                populateListView();
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(),"There is some issue in the database connectivity",Toast.LENGTH_LONG).show();
             }
         });
 
     }
-
-
 
 
 }

@@ -12,7 +12,7 @@ public class ProductDetails extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
 
         //Fetch values sent from intent.putExtra in product list
-        String savedExtra = getIntent().getStringExtra("animal");
+        String savedExtra = getIntent().getStringExtra("description");
         TextView myText = (TextView) findViewById(R.id.textView);
         myText.setText(savedExtra);
     }
