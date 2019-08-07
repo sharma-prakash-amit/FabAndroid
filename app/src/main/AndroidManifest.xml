@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".ProductList" />
         <activity android:name=".ProductDetails" />
-        <activity android:name=".AddProduct"></activity>
+        <activity android:name=".AddProduct" />
+        <activity android:name=".ContinueAsGuestOrAdminLogin" />
+        <activity android:name=".AdminLoginPage"></activity>
     </application>
 
 </manifest>
