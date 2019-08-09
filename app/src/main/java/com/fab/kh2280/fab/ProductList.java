@@ -1,6 +1,8 @@
 package com.fab.kh2280.fab;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -44,12 +46,13 @@ public class ProductList extends Activity {
     };
 
 
-    String[] productName={};//nameArray
-    String[] productDesc={};//infoArray
+    String[] productName={};
+    String[] productDesc={};
 
 
     ListView listView;
     DatabaseReference reff;
+    CommonFunctions commonFunctions = new CommonFunctions();
 
 
     @Override
@@ -57,6 +60,8 @@ public class ProductList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
+
+        commonFunctions.showProgressDialog(this);
         getData("Shoes");
 
 
@@ -98,24 +103,25 @@ public class ProductList extends Activity {
                 productName = new String[productData.keySet().size()];
                 productDesc = new String[productData.keySet().size()];
 
-                for (String key : productData.keySet()){
+                for (String key : productData.keySet()) {
 
-                    productName[i] = dataSnapshot.child(key).child("name")!=null?
-                            dataSnapshot.child(key).child("name").getValue().toString():
+                    productName[i] = dataSnapshot.child(key).child("name") != null ?
+                            dataSnapshot.child(key).child("name").getValue().toString() :
                             "-";
 
-                    productDesc[i] = dataSnapshot.child(key).child("description")!=null?
-                            dataSnapshot.child(key).child("description").getValue().toString():
+                    productDesc[i] = dataSnapshot.child(key).child("description") != null ?
+                            dataSnapshot.child(key).child("description").getValue().toString() :
                             "-";
 
                     i++;
                 }
-
                 populateListView();
+                commonFunctions.dismissProgressDialog();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                commonFunctions.dismissProgressDialog();
                 Toast.makeText(getApplicationContext(),"There is some issue in the database connectivity",Toast.LENGTH_LONG).show();
             }
         });

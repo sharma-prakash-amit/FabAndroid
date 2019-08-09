@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,6 +11,10 @@
         android:id="@+id/btnAdminLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnGuestContinue"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="51dp"
+        android:layout_marginEnd="113dp"
         android:text="@string/AdminLogin"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="149dp" />
@@ -19,7 +23,10 @@
         android:id="@+id/btnGuestContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btnAdminLogin"
+        android:layout_marginBottom="184dp"
         android:text="@string/GuestContinue"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="269dp" />
-</LinearLayout>
+</RelativeLayout>

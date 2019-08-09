@@ -1,18 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adminLoginLayout"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context="com.fab.kh2280.fab.AdminLoginPage">
+
+    <EditText
+        android:id="@+id/usernameTextbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="84dp"
+        android:ems="10"
+        android:hint="Username/Email Id"
+        android:inputType="textPersonName"
+        android:padding="20dp"
+        android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <EditText
+        android:id="@+id/passwordTextbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/usernameTextbox"
+        android:layout_marginTop="49dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="105dp" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordTextbox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="117dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="onLoginClick"
+        android:padding="20dp"
         android:text="@string/login"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="149dp" />
+        android:textColor="@android:color/background_light" />
 
-</LinearLayout>
+
+</RelativeLayout>
+
+
+

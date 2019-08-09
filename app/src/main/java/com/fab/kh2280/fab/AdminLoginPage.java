@@ -9,21 +9,15 @@ import android.widget.Button;
 
 public class AdminLoginPage extends Activity {
 
-    Button mbtnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login_page);
+    }
 
-        mbtnLogin = (Button)findViewById(R.id.btnLogin);
-
-        mbtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),AddProduct.class);
-                startActivity(i);
-            }
-        });
+    public void onLoginClick(View view) {
+        Intent i = new Intent(getApplicationContext(),AddProduct.class);
+        startActivity(i);
     }
 }
