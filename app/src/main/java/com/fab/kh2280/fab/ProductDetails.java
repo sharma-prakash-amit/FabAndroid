@@ -1,10 +1,11 @@
 package com.fab.kh2280.fab;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class ProductDetails extends AppCompatActivity {
+public class ProductDetails extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

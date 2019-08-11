@@ -12,7 +12,7 @@ public class CommonFunctions {
     ProgressDialog progress;
 
     public void showProgressDialog(Context context){
-        progress= new ProgressDialog(context,R.style.Theme_AppCompat_DayNight_Dialog);
+        progress= new ProgressDialog(context,R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         progress.setTitle("Loading");
         progress.setMessage("Please Wait...");
         progress.setCancelable(false);

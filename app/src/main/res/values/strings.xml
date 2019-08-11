@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Fab</string>
     <string name="AdminLogin">Login as Admin</string>
-    <string name="GuestContinue">Continue as Guest</string>
+    <string name="GuestContinue">Continue as Guest >></string>
     <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>

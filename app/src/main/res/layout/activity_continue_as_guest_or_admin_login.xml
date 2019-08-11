@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/customAppThemeColor"
     tools:context="com.fab.kh2280.fab.ContinueAsGuestOrAdminLogin">
 
     <Button
         android:id="@+id/btnAdminLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnGuestContinue"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="51dp"
-        android:layout_marginEnd="113dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="175dp"
+        android:background="@android:color/transparent"
         android:text="@string/AdminLogin"
+        android:onClick="adminLogin"
+        android:textColor="@color/cardview_light_background"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="149dp" />
 
@@ -23,10 +25,13 @@
         android:id="@+id/btnGuestContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btnAdminLogin"
-        android:layout_marginBottom="184dp"
+        android:layout_alignEnd="@+id/btnAdminLogin"
+        android:layout_below="@+id/btnAdminLogin"
+        android:layout_marginTop="19dp"
+        android:background="@android:color/transparent"
         android:text="@string/GuestContinue"
+        android:onClick="continueAsGuest"
+        android:textColor="@color/cardview_light_background"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="269dp" />
 </RelativeLayout>

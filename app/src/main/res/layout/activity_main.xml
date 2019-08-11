@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/customAppThemeColor"
     android:orientation="vertical"
     tools:context="com.fab.kh2280.fab.MainActivity">
 
@@ -22,6 +22,7 @@
             android:background="@color/colorPrimary"
             android:fontFamily="serif"
             android:text="Shoes"
+            android:textColor="@color/cardview_light_background"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:typeface="monospace"
@@ -42,6 +43,7 @@
             android:background="@color/colorPrimary"
             android:fontFamily="serif"
             android:text="Wallets"
+            android:textColor="@color/cardview_light_background"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:typeface="monospace"
@@ -62,6 +64,7 @@
             android:background="@color/colorPrimary"
             android:fontFamily="serif"
             android:text="Shirts"
+            android:textColor="@color/cardview_light_background"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:typeface="monospace"/>
