@@ -1,5 +1,6 @@
 package com.fab.kh2280.fab;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,7 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-public class AddProduct extends AppCompatActivity {
+public class AddProduct extends Activity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -51,14 +52,14 @@ public class AddProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_product);
 
-        mButtonChooseImage = findViewById(R.id.button_choose_image);
-        mButtonUpload = findViewById(R.id.button_upload);
-        mTextViewShowUploads = findViewById(R.id.text_view_show_uploads);
-        mEditTextFileName = findViewById(R.id.edit_text_file_name);
-        mImageView = findViewById(R.id.image_view);
-        mProgressBar = findViewById(R.id.progress_bar);
+        mButtonChooseImage = (Button)findViewById(R.id.button_choose_image);
+        mButtonUpload = (Button)findViewById(R.id.button_upload);
+        mTextViewShowUploads = (TextView)findViewById(R.id.text_view_show_uploads);
+        mEditTextFileName = (EditText)findViewById(R.id.edit_text_file_name);
+        mImageView = (ImageView)findViewById(R.id.image_view);
+        mProgressBar = (ProgressBar)findViewById(R.id.progress_bar);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -157,4 +158,6 @@ public class AddProduct extends AppCompatActivity {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
