@@ -13,6 +13,7 @@ public class Product {
     private String name;
 
     private String description;
+    private String imgUrl;
 
     public String getImage() {
         return image;
@@ -57,5 +58,13 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
