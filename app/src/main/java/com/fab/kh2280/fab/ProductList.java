@@ -54,18 +54,17 @@ public class ProductList extends Activity {
     DatabaseReference reff;
     CommonFunctions commonFunctions = new CommonFunctions();
 
+    String savedExtra = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
+        savedExtra = getIntent().getStringExtra("itemType");
 
         commonFunctions.showProgressDialog(this);
-        getData("Shoes");
-
-
-
+        getData(savedExtra);
     }
 
     private void populateListView() {

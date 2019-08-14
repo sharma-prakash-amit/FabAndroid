@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
+                i.putExtra("itemType","Shoes");
                 startActivity(i);
             }
         });
@@ -33,6 +34,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
+                i.putExtra("itemType","Shoes");
                 startActivity(i);
             }
         });
@@ -41,6 +43,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
+                i.putExtra("itemType","Shoes");
                 startActivity(i);
             }
         });
