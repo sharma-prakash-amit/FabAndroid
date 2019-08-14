@@ -128,4 +128,7 @@ public class ProductList extends Activity {
     }
 
 
+    public void onFabClick(View view) {
+        Toast.makeText(getApplicationContext(),"Fab is clicked",Toast.LENGTH_SHORT).show();
+    }
 }
