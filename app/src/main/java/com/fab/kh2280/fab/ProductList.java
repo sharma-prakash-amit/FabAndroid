@@ -52,18 +52,20 @@ public class ProductList extends AppCompatActivity {
     };
 
 
+    //Custom References
+    CommonFunctions commonFunctions = new CommonFunctions();
+    Constants constants = new Constants();
     private String[] productName={};
     private String[] productDesc={};
+    String savedExtra = "";
 
-
+    //In Built References
     private DrawerLayout d1;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     private ListView listView;
     private DatabaseReference reff;
-    CommonFunctions commonFunctions = new CommonFunctions();
 
-    String savedExtra = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,13 +107,13 @@ public class ProductList extends AppCompatActivity {
                 switch(id)
                 {
                     case R.id.shoes:
-                        navigateToSamePageWithItemType("Shoes");
+                        navigateToSamePageWithItemType(constants.Shoes);
                         break;
                     case R.id.tshirt:
-                        navigateToSamePageWithItemType("T-Shirts");
+                        navigateToSamePageWithItemType(constants.Tshirts);
                         break;
                     case R.id.wallets:
-                        navigateToSamePageWithItemType("Wallets");
+                        navigateToSamePageWithItemType(constants.Wallets);
                         break;
                     default:
                         return true;
@@ -126,10 +128,10 @@ public class ProductList extends AppCompatActivity {
 
     //Redirect to this same page with different item type on click of any item in hamburger
     private void navigateToSamePageWithItemType(String itemType) {
-        Intent i = new Intent(getApplicationContext(),this.getClass());
-        i.putExtra("itemType",itemType);
-        startActivity(i);
-        finish();
+        d1.closeDrawers();
+        commonFunctions.showProgressDialog(this);
+        getData(itemType);
+        setTitle(itemType);
     }
 
     private void populateListView() {
@@ -155,8 +157,6 @@ public class ProductList extends AppCompatActivity {
     }
 
     private void getData(String itemType) {
-
-
             reff = FirebaseDatabase.getInstance().getReference().child("Product").child(itemType);
             reff.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -166,7 +166,10 @@ public class ProductList extends AppCompatActivity {
 
                     if(productData==null){
                         View parentLayout = findViewById(android.R.id.content);
-                        Snackbar.make(parentLayout,"No data found for this item",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(parentLayout,constants.noDataFound,Snackbar.LENGTH_LONG).show();
+                        productName=new String[0];
+                        productDesc=new String[0];
+                        populateListView();
                     }else {
                         int i = 0;
                         productName = new String[productData.keySet().size()];
@@ -192,14 +195,9 @@ public class ProductList extends AppCompatActivity {
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     commonFunctions.dismissProgressDialog();
-                    Toast.makeText(getApplicationContext(),"There is some issue in the database connectivity",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),constants.connectivityIssues,Toast.LENGTH_LONG).show();
                 }
             });
-
-
-
-
-
     }
 
 

@@ -11,6 +11,7 @@ import android.widget.ListView;
 public class MainActivity extends Activity {
 
     private CardView shoeCard, tshirtCard, walletCard;
+    Constants constants = new Constants();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,32 +25,32 @@ public class MainActivity extends Activity {
         shoeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
-                i.putExtra("itemType","Shoes");
-                startActivity(i);
+                navigateToContinueAsGuestOrAdminLogin(constants.Shoes);
             }
         });
 
         tshirtCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
-                i.putExtra("itemType","T-Shirts");
-                startActivity(i);
+                navigateToContinueAsGuestOrAdminLogin(constants.Tshirts);
             }
         });
 
         walletCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
-                i.putExtra("itemType","Wallets");
-                startActivity(i);
+                navigateToContinueAsGuestOrAdminLogin(constants.Wallets);
             }
         });
 
 
 
+    }
+
+    private void navigateToContinueAsGuestOrAdminLogin(String itemType) {
+        Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
+        i.putExtra("itemType",itemType);
+        startActivity(i);
     }
 
 }
