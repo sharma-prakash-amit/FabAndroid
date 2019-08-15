@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/shoes"
-        android:title="Shoes" />
+        android:title="@string/menu_item1" />
     <item android:id="@+id/tshirt"
-        android:title="T-Shirts"/>
+        android:title="@string/menu_item2"/>
     <item android:id="@+id/wallets"
-        android:title="Wallets"/>
+        android:title="@string/menu_item3"/>
 </menu>

@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
-    private CardView shoeCard, shirtCard, walletCard;
+    private CardView shoeCard, tshirtCard, walletCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         shoeCard = (CardView) findViewById(R.id.shoes_view);
-        shirtCard = (CardView) findViewById(R.id.shirts_view);
+        tshirtCard = (CardView) findViewById(R.id.tshirts_view);
         walletCard = (CardView) findViewById(R.id.wallets_view);
 
         shoeCard.setOnClickListener(new View.OnClickListener() {
@@ -30,11 +30,11 @@ public class MainActivity extends Activity {
             }
         });
 
-        shirtCard.setOnClickListener(new View.OnClickListener() {
+        tshirtCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
-                i.putExtra("itemType","Shoes");
+                i.putExtra("itemType","T-Shirts");
                 startActivity(i);
             }
         });
@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,ContinueAsGuestOrAdminLogin.class);
-                i.putExtra("itemType","Shoes");
+                i.putExtra("itemType","Wallets");
                 startActivity(i);
             }
         });

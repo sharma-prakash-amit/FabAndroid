@@ -24,7 +24,7 @@
             android:background="@color/colorPrimary"
             android:fontFamily="serif"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Shoes"
+            android:text="@string/menu_item1"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="@color/cardview_light_background"
@@ -50,7 +50,7 @@
             android:background="@color/cardViewColor"
             android:fontFamily="serif"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Wallets"
+            android:text="@string/menu_item2"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="@color/cardview_light_background"
@@ -58,7 +58,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/shirts_view"
+        android:id="@+id/tshirts_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center"
@@ -67,13 +67,13 @@
         card_view:cardCornerRadius="4dp">
 
         <TextView
-            android:id="@+id/shirts_text"
+            android:id="@+id/tshirts_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:fontFamily="serif"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Shirts"
+            android:text="@string/menu_item3"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="@color/cardview_light_background"

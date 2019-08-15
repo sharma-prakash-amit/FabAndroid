@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -69,18 +70,16 @@ public class ProductList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
-        //get data according to item type and set the title on title bar
-        savedExtra = getIntent().getStringExtra("itemType");
-        getData(savedExtra);
-        setTitle(savedExtra);
-
         //start loading indicator
         commonFunctions.showProgressDialog(this);
 
         //Initialise hamburger menu
         initialiseHamburgerMenu();
 
-
+        //get data according to item type and set the title on title bar
+        savedExtra = getIntent().getStringExtra("itemType");
+        getData(savedExtra);
+        setTitle(savedExtra);
     }
 
     private void initialiseHamburgerMenu() {
@@ -109,10 +108,10 @@ public class ProductList extends AppCompatActivity {
                         navigateToSamePageWithItemType("Shoes");
                         break;
                     case R.id.tshirt:
-                        navigateToSamePageWithItemType("Shoes");
+                        navigateToSamePageWithItemType("T-Shirts");
                         break;
                     case R.id.wallets:
-                        navigateToSamePageWithItemType("Shoes");
+                        navigateToSamePageWithItemType("Wallets");
                         break;
                     default:
                         return true;
@@ -125,6 +124,7 @@ public class ProductList extends AppCompatActivity {
         });
     }
 
+    //Redirect to this same page with different item type on click of any item in hamburger
     private void navigateToSamePageWithItemType(String itemType) {
         Intent i = new Intent(getApplicationContext(),this.getClass());
         i.putExtra("itemType",itemType);
@@ -156,39 +156,49 @@ public class ProductList extends AppCompatActivity {
 
     private void getData(String itemType) {
 
-        reff = FirebaseDatabase.getInstance().getReference().child("Product").child(itemType);
-        reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String,String> productData = new HashMap<>();
-                productData = (HashMap<String, String>) dataSnapshot.getValue();
 
-                int i=0;
-                productName = new String[productData.keySet().size()];
-                productDesc = new String[productData.keySet().size()];
+            reff = FirebaseDatabase.getInstance().getReference().child("Product").child(itemType);
+            reff.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot){
+                    HashMap<String,String> productData;
+                    productData = (HashMap<String, String>) dataSnapshot.getValue();
 
-                for (String key : productData.keySet()) {
+                    if(productData==null){
+                        View parentLayout = findViewById(android.R.id.content);
+                        Snackbar.make(parentLayout,"No data found for this item",Snackbar.LENGTH_LONG).show();
+                    }else {
+                        int i = 0;
+                        productName = new String[productData.keySet().size()];
+                        productDesc = new String[productData.keySet().size()];
 
-                    productName[i] = dataSnapshot.child(key).child("name") != null ?
-                            dataSnapshot.child(key).child("name").getValue().toString() :
-                            "-";
+                        for (String key : productData.keySet()) {
 
-                    productDesc[i] = dataSnapshot.child(key).child("description") != null ?
-                            dataSnapshot.child(key).child("description").getValue().toString() :
-                            "-";
+                            productName[i] = dataSnapshot.child(key).child("name") != null ?
+                                    dataSnapshot.child(key).child("name").getValue().toString() :
+                                    "-";
 
-                    i++;
+                            productDesc[i] = dataSnapshot.child(key).child("description") != null ?
+                                    dataSnapshot.child(key).child("description").getValue().toString() :
+                                    "-";
+
+                            i++;
+                        }
+                        populateListView();
+                    }
+                    commonFunctions.dismissProgressDialog();
                 }
-                populateListView();
-                commonFunctions.dismissProgressDialog();
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                commonFunctions.dismissProgressDialog();
-                Toast.makeText(getApplicationContext(),"There is some issue in the database connectivity",Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    commonFunctions.dismissProgressDialog();
+                    Toast.makeText(getApplicationContext(),"There is some issue in the database connectivity",Toast.LENGTH_LONG).show();
+                }
+            });
+
+
+
+
 
     }
 
