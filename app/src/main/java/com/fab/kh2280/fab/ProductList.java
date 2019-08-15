@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -203,7 +205,31 @@ public class ProductList extends AppCompatActivity {
 
     //TODO - Facebook and Instagram Link
     public void onFabClick(View view) {
-        Toast.makeText(getApplicationContext(),"Fab is clicked",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"It will open facebook or insta",Toast.LENGTH_SHORT).show();
+//        Intent openFB = openFacebook(getApplicationContext());
+//        startActivity(openFB);
+//
+//        Intent openInsta = openInstagram(getApplicationContext());
+//        startActivity(openInsta);
+    }
+
+    private static Intent openFacebook(Context context) {
+        try{
+            context.getPackageManager().getPackageInfo("com.facebook.katana",0);
+            return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/1236513103082929"));
+
+        }catch (Exception e){
+            return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/fabcollectionz21"));
+        }
+    }
+
+    private static Intent openInstagram(Context context){
+        try {
+            context.getPackageManager().getPackageInfo("com.instagram.android",0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/fab.collectionz"));
     }
 
     //Check whether the option is clicked in the hamburger or not

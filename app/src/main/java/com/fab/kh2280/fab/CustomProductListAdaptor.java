@@ -19,13 +19,10 @@ public class CustomProductListAdaptor extends ArrayAdapter {
     //to reference the Activity
     private final Activity context;
 
-    //to store the animal images
     private final Integer[] imageIDarray;
 
-    //to store the list of countries
     private final String[] nameArray;
 
-    //to store the list of countries
     private final String[] infoArray;
 
     public CustomProductListAdaptor(Activity context, String[] nameArrayParam, String[] infoArrayParam, Integer[] imageIDArrayParam){
