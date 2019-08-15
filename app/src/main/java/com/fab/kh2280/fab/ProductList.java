@@ -5,10 +5,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ProductList extends Activity {
+public class ProductList extends AppCompatActivity {
 
     //Master data of list
     Integer[] imageArray = {
@@ -46,12 +51,15 @@ public class ProductList extends Activity {
     };
 
 
-    String[] productName={};
-    String[] productDesc={};
+    private String[] productName={};
+    private String[] productDesc={};
 
 
-    ListView listView;
-    DatabaseReference reff;
+    private DrawerLayout d1;
+    private ActionBarDrawerToggle t;
+    private NavigationView nv;
+    private ListView listView;
+    private DatabaseReference reff;
     CommonFunctions commonFunctions = new CommonFunctions();
 
     String savedExtra = "";
@@ -61,10 +69,67 @@ public class ProductList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
+        //get data according to item type and set the title on title bar
         savedExtra = getIntent().getStringExtra("itemType");
-
-        commonFunctions.showProgressDialog(this);
         getData(savedExtra);
+        setTitle(savedExtra);
+
+        //start loading indicator
+        commonFunctions.showProgressDialog(this);
+
+        //Initialise hamburger menu
+        initialiseHamburgerMenu();
+
+
+    }
+
+    private void initialiseHamburgerMenu() {
+        d1 = (DrawerLayout)findViewById(R.id.activity_product_list);
+        t = new ActionBarDrawerToggle(this, d1,R.string.Open, R.string.Close);
+        t.setDrawerIndicatorEnabled(true);
+
+        d1.addDrawerListener(t);
+        t.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        nv = (NavigationView)findViewById(R.id.nv);
+        onHamburgerItemClicked(nv);
+
+    }
+
+    private void onHamburgerItemClicked(NavigationView nv) {
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id)
+                {
+                    case R.id.shoes:
+                        navigateToSamePageWithItemType("Shoes");
+                        break;
+                    case R.id.tshirt:
+                        navigateToSamePageWithItemType("Shoes");
+                        break;
+                    case R.id.wallets:
+                        navigateToSamePageWithItemType("Shoes");
+                        break;
+                    default:
+                        return true;
+                }
+
+
+                return true;
+
+            }
+        });
+    }
+
+    private void navigateToSamePageWithItemType(String itemType) {
+        Intent i = new Intent(getApplicationContext(),this.getClass());
+        i.putExtra("itemType",itemType);
+        startActivity(i);
+        finish();
     }
 
     private void populateListView() {
@@ -128,7 +193,14 @@ public class ProductList extends Activity {
     }
 
 
+    //TODO - Facebook and Instagram Link
     public void onFabClick(View view) {
         Toast.makeText(getApplicationContext(),"Fab is clicked",Toast.LENGTH_SHORT).show();
+    }
+
+    //Check whether the option is clicked in the hamburger or not
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return t.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 }

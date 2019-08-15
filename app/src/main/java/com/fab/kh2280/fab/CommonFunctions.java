@@ -2,6 +2,7 @@ package com.fab.kh2280.fab;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 
 /**
  * Created by KH2280 on 09-08-2019.
@@ -9,7 +10,7 @@ import android.content.Context;
 
 public class CommonFunctions {
 
-    ProgressDialog progress;
+    private ProgressDialog progress;
 
     public void showProgressDialog(Context context){
         progress= new ProgressDialog(context,R.style.Theme_AppCompat_DayNight_Dialog_Alert);
@@ -23,4 +24,5 @@ public class CommonFunctions {
     public void dismissProgressDialog(){
         progress.dismiss();
     }
+
 }

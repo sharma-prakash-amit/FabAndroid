@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class ContinueAsGuestOrAdminLogin extends Activity {
 
-    String savedExtra="";
+    private String savedExtra="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
