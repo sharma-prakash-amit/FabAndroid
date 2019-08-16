@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
         //Creating dialog box
         AlertDialog alert = builder.create();
         //Setting the title manually
-        alert.setTitle(constants.alertDialogTitle);
+//        alert.setTitle(constants.alertDialogTitle);
         alert.show();
     }
 }

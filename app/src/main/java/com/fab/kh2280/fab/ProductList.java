@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -60,6 +62,7 @@ public class ProductList extends AppCompatActivity {
     private String[] productName={};
     private String[] productDesc={};
     String savedExtra = "";
+    Boolean isFABOpen = false;
 
     //In Built References
     private DrawerLayout d1;
@@ -67,6 +70,7 @@ public class ProductList extends AppCompatActivity {
     private NavigationView nv;
     private ListView listView;
     private DatabaseReference reff;
+    private FloatingActionButton facebookFab,instaFab;
 
 
     @Override
@@ -130,6 +134,9 @@ public class ProductList extends AppCompatActivity {
 
     //Redirect to this same page with different item type on click of any item in hamburger
     private void navigateToSamePageWithItemType(String itemType) {
+        if(isFABOpen) {
+            closeFABMenu();
+        }
         d1.closeDrawers();
         commonFunctions.showProgressDialog(this);
         getData(itemType);
@@ -148,6 +155,9 @@ public class ProductList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
+                if(isFABOpen) {
+                    closeFABMenu();
+                }
                 Intent intent = new Intent(ProductList.this, ProductDetails.class);
                 String message = productDesc[position];
                 intent.putExtra("description", message);
@@ -203,14 +213,46 @@ public class ProductList extends AppCompatActivity {
     }
 
 
-    //TODO - Facebook and Instagram Link
     public void onFabClick(View view) {
-        Toast.makeText(getApplicationContext(),"It will open facebook or insta",Toast.LENGTH_SHORT).show();
-//        Intent openFB = openFacebook(getApplicationContext());
-//        startActivity(openFB);
-//
-//        Intent openInsta = openInstagram(getApplicationContext());
-//        startActivity(openInsta);
+
+         facebookFab = (FloatingActionButton) findViewById(R.id.facebookFab);
+         instaFab = (FloatingActionButton) findViewById(R.id.instagramFab);
+
+        if(!isFABOpen){
+            showFABMenu();
+        }else{
+            closeFABMenu();
+        }
+
+        facebookFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openFB = openFacebook(getApplicationContext());
+                startActivity(openFB);
+            }
+        });
+
+
+        instaFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openInsta = openInstagram(getApplicationContext());
+                startActivity(openInsta);
+            }
+        });
+
+    }
+
+    private void showFABMenu(){
+        isFABOpen=true;
+        facebookFab.animate().translationY(-getResources().getDimension(R.dimen.standard_60));
+        instaFab.animate().translationY(-getResources().getDimension(R.dimen.standard_120));
+    }
+
+    private void closeFABMenu(){
+        isFABOpen=false;
+        facebookFab.animate().translationY(0);
+        instaFab.animate().translationY(0);
     }
 
     private static Intent openFacebook(Context context) {
@@ -237,4 +279,6 @@ public class ProductList extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return t.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
+
+    
 }

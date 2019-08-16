@@ -25,17 +25,38 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_more_vert"
-        app:fabSize="normal"
-        android:backgroundTint="@color/colorPrimary"
-        android:id="@+id/fabMoreOptions"
-        android:onClick="onFabClick"
-        app:elevation="6dp"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/instagramFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/instagram"
+            app:elevation="6dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/facebookFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/facebook"
+            app:elevation="6dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_more_vert"
+            app:fabSize="normal"
+            android:backgroundTint="@color/colorPrimary"
+            android:id="@+id/fabMoreOptions"
+            android:onClick="onFabClick"
+            app:elevation="6dp"/>
+
 
     </android.support.design.widget.CoordinatorLayout>
 
